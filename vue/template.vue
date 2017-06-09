@@ -1,5 +1,5 @@
-<template id="temp-page">
-  <div>
+<template >
+  <div id="temp-page3">
   <a href="index.html">index</a>
     <div v-for="x in list">{{x}}</div>
   </div>
@@ -7,13 +7,18 @@
 
 <style>
 body {
-    color: blue;
+    color: gray;
+}
+#temp-page3{
+    background: blue;
+    position: absolute;
+    width:100%;
 }
 </style>
 <script>
 export default {
     data:function(){
-        return {list:["zfx","cxm","zh","cyx","tzp","hnp"]}
+        return {list:["zfx","cxm","zh"]}
     }
 }
 </script>
