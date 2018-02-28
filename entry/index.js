@@ -6,7 +6,8 @@ import index from '../vue/index.vue';
 import 'style/style.scss';
 import 'style/animation.scss';
 import utils from 'js/global.js';
-console.log(utils);
+
+//console.log(utils);
 Vue.use(VueRouter);
 Vue.config.debug = true;//开启错误提示
 var routes = [
@@ -16,13 +17,17 @@ var routes = [
   { path: '/', component: index },
   { path: '*', component: {template:"<div>404</div>" }}
 ];
-var router = new VueRouter({
-  routes // （缩写）相当于 routes: routes
+
+var router = new VueRouter({ 
+  routes // （缩写）相当于 routes: router
 })
+
 new Vue({
 	el: '#app',
 	data:{
-		transitionName:''
+		transitionName:'',
+		data:window.initialData,
+		dataString:123123+JSON.stringify(window.initialData)
 	},
 	router,
 	watch: {

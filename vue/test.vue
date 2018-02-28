@@ -1,4 +1,5 @@
 <template >
+    
   <div id="temp-page">
   <a href="template.html">template</a>
     <div v-for="x in list">{{x}}</div>
@@ -10,7 +11,7 @@ body {
     color: gray;
 }
 #temp-page{
-    background:#666;
+    background:rgb(226, 181, 181);
     position: absolute;
     width:100%;
 }

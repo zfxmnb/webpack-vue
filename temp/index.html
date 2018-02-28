@@ -2,11 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>index</title>
+    <script>
+        window.initialData = <%=#data%>
+    </script>
 </head>
 <body>
     <img src="../complete/src/images/img1.png">
-<!--     <img src="http://img.blog.csdn.net/20170426085158021?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzMyMzUyNzk=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center"> -->
     <div id="app">
         <!-- <template-index></template-index> -->
         <p>
@@ -16,6 +18,9 @@
             <router-link to="/about">Go to about</router-link>
             <router-link to="/home/test">Go to about</router-link>
         </p>
+        <textarea name="" id="" cols="30" rows="10" :value='dataString'>
+
+        </textarea>
         <transition :name="transitionName">
             <router-view></router-view>
         </transition>

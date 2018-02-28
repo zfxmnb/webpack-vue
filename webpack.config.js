@@ -7,17 +7,31 @@ module.exports = {
   entry: config.entry,
   output: {
     path: path.join(__dirname, 'complete/src/bundle'),
-    filename: '[name].bundle.js'
+    filename: '[name].bundle.[hash:5].js',
   },
   module: {
     loaders: [
       { test: /\.vue$/, loader: 'vue-loader'},//vue加载器
-      { test: /\.css$/, loader: 'style-loader!css-loader',include : path.resolve(__dirname,'complete/src/styles')},//css加载器
-      { test: /\.js$/,exclude: /node_modules/, loader: "babel-loader", query: {presets: ['es2015']}, exclude : path.resolve(__dirname,'node_modules')},//babel加载器
-      { test: /\.html$/, loader: 'html-loader' },//vue加载器
-      { test: /\.(scss|sass)$/, loader: 'style-loader!css-loader!sass-loader'},//sass加载器
+      { test: /\.css$/, loader: 
+        ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader",
+          publicPath: path.resolve(__dirname,'complete/src/styles')
+        })
+        //'style-loader!css-loader',include : path.resolve(__dirname,'complete/src/styles')
+      },//css加载器
+      { test: /\.js$/, loader: "babel-loader", query: {presets: ['es2015']}, exclude : path.resolve(__dirname,'node_modules')},//babel加载器
+      { test: /\.html$/, loader: 'html-loader',include : path.resolve(__dirname,'temp')},//vue加载器
+      { test: /\.(scss|sass)$/, loader: 
+        ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: ["css-loader","postcss-loader","sass-loader"],
+          publicPath: path.resolve(__dirname,'./complete/src/styles')
+        })
+        //'style-loader!css-loader!sass-loader'
+      },//sass加载器
       // { test: /\.less$/, loader: 'style-loader!css-loader!less-loader'},//less加载器
-      { test: /\.(jpg|png)$/, loader: "url-loader?limit=8192"},//打包图片
+      { test: /\.(jpg|png)$/, loader: "url-loader?limit=8192",include : path.resolve(__dirname,'complete/src/images')},//打包图片
     ]
   },
   resolve: {
@@ -44,5 +58,7 @@ module.exports = {
             "window.jQuery":"jquery",
             Vue:"vue"
         }),
+        new webpack.HotModuleReplacementPlugin(),
+        new ExtractTextPlugin('[name].[hash:5].css')
     ])
 }
